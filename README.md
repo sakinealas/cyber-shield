@@ -14,7 +14,6 @@ Proje süresince kimlik yönetimi, erişim kontrolü, yetkilendirme ve yapıland
 Bu depo, projenin kaynak kodlarını, yapılandırma dosyalarını ve güvenlik yapılandırmalarını içermektedir.
 
 ## Lisans Seçimi (GPLv3)
-
 Bu projede GNU General Public License v3 (GPLv3) tercih edilmiştir. 
 Bu lisansın seçilme nedeni, projenin ve projeden türetilen çalışmaların açık kaynak olarak kalmasının garanti altına alınmak istenmesidir.
 
@@ -41,3 +40,6 @@ Log çıktıları ve geçici dosyaların sürüm kontrolüne dahil edilmemesi i�
 README.md ve LICENSE
 Projenin amacı, mimarisi ve kullanım yaklaşımı README dosyasında açıklanmış; açık kaynak lisanslama ile yeniden kullanılabilirlik sağlanmıştır.
 
+## Proje Dizin Yapısı ve Güvenlik Tasarımı
+Kritik delil klasörleri, olay müdahale senaryosu kapsamında güvenli olacak şekilde yapılandırılmıştır. 
+Evidence dizini root sahipliğinde oluşturulmuş, Access Control List (ACL) kullanılarak yalnızca yetkili analiz grubunun erişimine açılmıştır. Default ACL (setfacl -d) tanımlanarak sonradan oluşturulan dosyaların da otomatik olarak aynı yetkilendirme politikalarıyla korunması sağlanmıştır.
