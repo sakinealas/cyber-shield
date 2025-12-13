@@ -21,3 +21,23 @@ Bu lisansın seçilme nedeni, projenin ve projeden türetilen çalışmaların a
 GPLv3, yazılımın özgürce kullanılmasına, incelenmesine, değiştirilmesine ve dağıtılmasına izin verirken; 
 türetilen çalışmaların da aynı lisans koşullarıyla paylaşılmasını zorunlu kılar. 
 Bu sayede proje, kapalı kaynaklı hale getirilemez ve açık kaynak felsefesine uygun şekilde sürdürülebilirliği sağlanır.
+
+## Proje Dizin Yapısı ve Güvenlik Tasarımı
+docker/
+Projenin taşınabilir ve izole bir ortamda çalıştırılabilmesi amacıyla Docker yapılandırmaları bu dizin altında tutulmuştur. Bu yaklaşım kurulum bağımlılıklarını azaltmakta ve tekrar edilebilirliği sağlamaktadır.
+
+scripts/
+Siber olay tespiti ve müdahale süreçlerinde kullanılan tüm Bash script’leri bu dizin altında merkezi olarak toplanmıştır. Script’ler log analizi, sistem izleme ve şüpheli IP yönetimi gibi görevleri yerine getirmektedir.
+
+services/
+Script’lerin sistem seviyesinde otomatik çalıştırılabilmesi için systemd servis ve zamanlayıcı (timer) dosyaları bu dizinde konumlandırılmıştır. Bu sayede sürekli izleme ve otomasyon sağlanmıştır.
+
+evidence/
+Olay müdahalesi sürecinde elde edilecek dijital kanıtların saklanması için ayrılmıştır. Klasör bilinçli olarak boş bırakılmış, yalnızca Git tarafından takip edilebilmesi amacıyla .gitkeep dosyası eklenmiştir. Bu yaklaşım delil bütünlüğü prensibine uygundur.
+
+.gitignore
+Log çıktıları ve geçici dosyaların sürüm kontrolüne dahil edilmemesi için yapılandırılmıştır.
+
+README.md ve LICENSE
+Projenin amacı, mimarisi ve kullanım yaklaşımı README dosyasında açıklanmış; açık kaynak lisanslama ile yeniden kullanılabilirlik sağlanmıştır.
+
