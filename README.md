@@ -19,8 +19,17 @@ kurulmasının ardından proje dizini klonlanarak servisler ayağa kaldırılabi
 ```bash
 git clone https://github.com/sakinealas/cyber-shield.git
 cd cyber-shield
-Delil (evidence) dizini ve güvenlik yapılandırmaları sistem üzerinde ACL kullanılarak
-önceden yapılandırılmıştır. Script ve servisler ilgili dizinler altında yer almaktadır.
+Gerekli dizin yapıları kontrol edilir:
+         /var/www/cyber-shield → Web uygulaması
+         /opt/cyber-shield/evidence → Kritik delil klasörü
+Yetkili kullanıcı ve gruplar oluşturulur:
+         webadmin → Web dizini yönetimi
+         analysts → Delil analizi yetkisi
+Dosya ve dizin izinleri ACL ve SGID kullanılarak yapılandırılır:
+         /var/www yalnızca webadmin grubuna açıktır
+         evidence dizini yalnızca analysts grubuna açıktır
+         Default ACL sayesinde yeni dosyalar otomatik olarak korunur
+Servisler ve betikler (scripts) sistem servisleri üzerinden çalıştırılabilir hale getirilir.
 
 ## Lisans Seçimi (GPLv3)
 Bu projede GNU General Public License v3 (GPLv3) tercih edilmiştir. 
@@ -52,3 +61,12 @@ Projenin amacı, mimarisi ve kullanım yaklaşımı README dosyasında açıklan
 ## Proje Dizin Yapısı ve Güvenlik Tasarımı
 Kritik delil klasörleri, olay müdahale senaryosu kapsamında güvenli olacak şekilde yapılandırılmıştır. 
 Evidence dizini root sahipliğinde oluşturulmuş, Access Control List (ACL) kullanılarak yalnızca yetkili analiz grubunun erişimine açılmıştır. Default ACL (setfacl -d) tanımlanarak sonradan oluşturulan dosyaların da otomatik olarak aynı yetkilendirme politikalarıyla korunması sağlanmıştır.
+
+## Kullanıcı / Grup İzolasyonu ve Dosya Yetkilendirme
+Bu projede web kök dizini olan /var/www/cyber-shield için kullanıcı ve grup bazlı yetkilendirme uygulanmıştır.
+Dizin sahibi root, grup sahibi ise webadmin olarak yapılandırılmıştır.
+Dizinde SGID biti etkinleştirilmiş (chmod 2770) ve ACL ile yetkilendirme yapılmıştır.
+Bu sayede yalnızca webadmin grubuna üye kullanıcılar dizin üzerinde işlem yapabilmektedir.
+Ayrıca Default ACL (setfacl -d) tanımlanarak, dizin altında oluşturulan yeni dosyaların da otomatik olarak aynı yetkileri miras alması sağlanmıştır.
+other (yetkisiz) kullanıcılar için tüm erişimler kapatılmıştır.
+Bu yapılandırma ile En Az Yetki (Least Privilege) ilkesi uygulanmış ve yetkisiz erişim bilinçli olarak engellenmiştir.
