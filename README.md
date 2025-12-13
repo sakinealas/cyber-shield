@@ -12,3 +12,12 @@ Proje süresince kimlik yönetimi, erişim kontrolü, yetkilendirme ve yapıland
 
 ## Kapsam
 Bu depo, projenin kaynak kodlarını, yapılandırma dosyalarını ve güvenlik yapılandırmalarını içermektedir.
+
+## Lisans Seçimi (GPLv3)
+
+Bu projede GNU General Public License v3 (GPLv3) tercih edilmiştir. 
+Bu lisansın seçilme nedeni, projenin ve projeden türetilen çalışmaların açık kaynak olarak kalmasının garanti altına alınmak istenmesidir.
+
+GPLv3, yazılımın özgürce kullanılmasına, incelenmesine, değiştirilmesine ve dağıtılmasına izin verirken; 
+türetilen çalışmaların da aynı lisans koşullarıyla paylaşılmasını zorunlu kılar. 
+Bu sayede proje, kapalı kaynaklı hale getirilemez ve açık kaynak felsefesine uygun şekilde sürdürülebilirliği sağlanır.
