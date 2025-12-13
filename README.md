@@ -13,6 +13,15 @@ Proje süresince kimlik yönetimi, erişim kontrolü, yetkilendirme ve yapıland
 ## Kapsam
 Bu depo, projenin kaynak kodlarını, yapılandırma dosyalarını ve güvenlik yapılandırmalarını içermektedir.
 
+## Kurulum ve Çalıştırma
+Proje Linux tabanlı bir ortamda çalışacak şekilde tasarlanmıştır. Gerekli bağımlılıkların
+kurulmasının ardından proje dizini klonlanarak servisler ayağa kaldırılabilir.
+```bash
+git clone https://github.com/sakinealas/cyber-shield.git
+cd cyber-shield
+Delil (evidence) dizini ve güvenlik yapılandırmaları sistem üzerinde ACL kullanılarak
+önceden yapılandırılmıştır. Script ve servisler ilgili dizinler altında yer almaktadır.
+
 ## Lisans Seçimi (GPLv3)
 Bu projede GNU General Public License v3 (GPLv3) tercih edilmiştir. 
 Bu lisansın seçilme nedeni, projenin ve projeden türetilen çalışmaların açık kaynak olarak kalmasının garanti altına alınmak istenmesidir.
