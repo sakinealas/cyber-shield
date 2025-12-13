@@ -1,4 +1,4 @@
-# cyber-shield – Güvenli Web Projesi
+# cyber-shield – Siber Olay Müdahale İstasyonu – Cyber Shield Projesi
 
 ## Proje Tanımı
 Bu proje, AKİS dersi kapsamında güvenli yazılım geliştirme prensiplerini uygulamak amacıyla oluşturulmuştur. 
