@@ -1,18 +1,22 @@
-# OS / Editor files
-.DS_Store
-Thumbs.db
-
-# Logs
+# Derleme ve geçici dosyalar
 *.log
+*.tmp
+*.swp
 
-# Environment / secrets
-.env
-.env.*
+# Özel log/kanıt dosyaları
+evidence/*
+!evidence/.gitkeep
 
-# Dependency directories
-node_modules/
-vendor/
+# Python cache (docker içinde oluşabilir)
+__pycache__/
+*.pyc
 
-# IDE configs
+# Sistem bağımlı dosyalar
+.DS_Store
+
+# IDE editör dosyaları
 .vscode/
 .idea/
+
+# Docker çıktıları
+docker/*.tar
