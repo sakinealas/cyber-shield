@@ -1,4 +1,4 @@
-# AKİS – Güvenli Web Projesi
+# cyber-shield – Güvenli Web Projesi
 
 ## Proje Tanımı
 Bu proje, AKİS dersi kapsamında güvenli yazılım geliştirme prensiplerini uygulamak amacıyla oluşturulmuştur. 
