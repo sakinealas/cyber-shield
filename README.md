@@ -70,3 +70,17 @@ Bu sayede yalnızca webadmin grubuna üye kullanıcılar dizin üzerinde işlem 
 Ayrıca Default ACL (setfacl -d) tanımlanarak, dizin altında oluşturulan yeni dosyaların da otomatik olarak aynı yetkileri miras alması sağlanmıştır.
 other (yetkisiz) kullanıcılar için tüm erişimler kapatılmıştır.
 Bu yapılandırma ile En Az Yetki (Least Privilege) ilkesi uygulanmış ve yetkisiz erişim bilinçli olarak engellenmiştir.
+
+##  Süreç Yönetimi
+Bu aşamada sistemde çalışan süreçler incelenmiş, CPU ve RAM kullanımına göre sıralama yapılmıştır.
+ps aux --sort=-%cpu ve ps aux --sort=-%mem komutları kullanılarak en fazla kaynak tüketen süreçler belirlenmiştir.
+Ayrıca ps aux | grep 'Z' komutu ile Zombie process kontrolü gerçekleştirilmiş ve herhangi bir anormal sürece rastlanmamıştır.
+
+## Metin İşleme ve Log Analizi 
+Web sunucusuna ait access.log dosyası üzerinde awk, sed ve regex araçlarıyla bir analiz zinciri oluşturulmuştur.
+Bu analiz kapsamında:
+  Loglardaki IP adreslerinin istek sayıları çıkarılmış,
+  4xx ve 5xx hata kodları filtrelenmiş,
+  IP bazlı hata/saldırı sayıları hesaplanmış,
+  sed + awk kullanılarak log satırlarından gereksiz bilgiler temizlenmiş ve sade bir çıktı elde edilmiştir.
+Analiz sonucunda, en çok istek yapan IP adresi listenin en başında gösterilmiştir.
