@@ -84,3 +84,27 @@ Bu analiz kapsamında:
   IP bazlı hata/saldırı sayıları hesaplanmış,
   sed + awk kullanılarak log satırlarından gereksiz bilgiler temizlenmiş ve sade bir çıktı elde edilmiştir.
 Analiz sonucunda, en çok istek yapan IP adresi listenin en başında gösterilmiştir.
+
+## Servis Yönetimi ve Reverse Proxy
+1. Reverse Proxy Yapılandırması (Nginx)
+Nginx, istemciden gelen HTTP isteklerini arka planda çalışan uygulamaya iletmek üzere reverse proxy modunda yapılandırılmıştır.
+Yapılandırma doğrulanmış, servis başarılı şekilde çalışmıştır.
+
+2. Systemd Servis Tanımı
+Backend uygulamasının kararlı ve otomatik yönetilebilmesi için bir systemd servis dosyası oluşturulmuştur.
+Servis dosyasında:
+    Restart=on-failure (dayanıklılık)
+    After=network.target (bağımlılık tanımı)
+yer almakta olup servis enable/start edilerek sistem tarafından yönetilir hale getirilmiştir.
+
+3. Günlük (Log) Yönetimi
+Uygulamaya ait logların döngüsel olarak arşivlenmesi için logrotate yapılandırması yapılmıştır.
+/var/log/backend.log oluşturulmuş,
+Logrotate yapılandırması yazılmış,
+logrotate -f ile test edilerek çalıştığı doğrulanmıştır.
+
+4. Hata Analizi (journalctl)
+Servise ait hata kayıtları aşağıdaki filtre ile analiz edilmiştir:
+        journalctl -u backend -p err
+Sonuç olarak herhangi bir hata kaydına rastlanmamıştır.
+
