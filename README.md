@@ -81,15 +81,24 @@ Otomasyon
 Log analizi bir Bash betiği ile otomatikleştirilmiş, betiğin CPU süresi ve bellek kullanımı (time / RSS) raporlanmıştır.
 
 ## SERVİS YÖNETİMİ VE GÜNLÜKLEME
-Systemd servisi systemctl edit yöntemiyle özelleştirilmiş, servis davranışı override yapılandırması ile kontrol altına alınmıştır.
+-Systemd servisi systemctl edit yöntemiyle özelleştirilmiş, servis davranışı override yapılandırması ile kontrol altına alınmıştır.
 
-Servis dosyasında Restart=on-failure ve RestartSec parametreleri kullanılarak hata durumlarında otomatik yeniden başlatma mekanizması uygulanmıştır.
+-Servis dosyasında Restart=on-failure ve RestartSec parametreleri kullanılarak hata durumlarında otomatik yeniden başlatma mekanizması uygulanmıştır.
 
-Servis bağımlılıkları doğru şekilde tanımlanmış, ağ servisi hazır olmadan başlatılmaması için After=network.target kullanılmıştır.
+-Servis bağımlılıkları doğru şekilde tanımlanmış, ağ servisi hazır olmadan başlatılmaması için After=network.target kullanılmıştır.
 
-Servise ait hata kayıtları journalctl -u <servis_adı> -p err filtresi ile analiz edilmiş, kritik veya hata seviyesinde log tespit edilmemiştir.
+-Servise ait hata kayıtları journalctl -u <servis_adı> -p err filtresi ile analiz edilmiş, kritik veya hata seviyesinde log tespit edilmemiştir.
 
-Servis logları logrotate ile yönetilmiş, yapılandırma logrotate -f komutu kullanılarak zorla tetiklenmiş ve log döndürme işleminin başarılı olduğu kanıtlanmıştır.
+-Servis logları logrotate ile yönetilmiş, yapılandırma logrotate -f komutu kullanılarak zorla tetiklenmiş ve log döndürme işleminin başarılı olduğu kanıtlanmıştır.
 
-Sistem paketleri (systemd, logrotate vb.) APT üzerinden hatasız şekilde yönetilmiş, servislerin kararlı çalıştığı doğrulanmıştır.
+-Sistem paketleri (systemd, logrotate vb.) APT üzerinden hatasız şekilde yönetilmiş, servislerin kararlı çalıştığı doğrulanmıştır.
 
+## Sistem Sertleştirme ve Otomasyon
+Bu haftada sistem erişimi ve otomasyon süreçleri güvenlik odaklı şekilde yapılandırılmıştır.
+SSH erişimi parola tabanlı kimlik doğrulama kapatılarak yalnızca anahtar (key-based) üzerinden sağlanmıştır. Root kullanıcısı ile doğrudan erişim devre dışı bırakılmıştır.
+
+Açık portlar ss komutu ile analiz edilmiş, SSH logları üzerinden başarısız giriş denemeleri tespit edilmiştir. Belirlenen eşik değerin üzerindeki IP adresleri otomatik olarak ufw güvenlik duvarı kurallarına eklenerek engellenmiştir.
+
+Otomasyon betiği modüler (fonksiyon bazlı) yapıda geliştirilmiş, set -e ve trap kullanılarak hata yönetimi sağlanmıştır. Gereksiz tekrar çalışmaları önlemek amacıyla önbellek (cache) mekanizması uygulanmıştır.
+
+Betik, systemd service ve systemd timer kullanılarak insan müdahalesi olmadan periyodik olarak çalışacak şekilde zamanlanmış, tüm çıktılar merkezi log dosyasına kaydedilmiştir.
