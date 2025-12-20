@@ -80,3 +80,16 @@ Güvenlik logları grep, awk, sed ve Regex kullanılarak işlenmiş; saldırgan 
 Otomasyon
 Log analizi bir Bash betiği ile otomatikleştirilmiş, betiğin CPU süresi ve bellek kullanımı (time / RSS) raporlanmıştır.
 
+## SERVİS YÖNETİMİ VE GÜNLÜKLEME
+Systemd servisi systemctl edit yöntemiyle özelleştirilmiş, servis davranışı override yapılandırması ile kontrol altına alınmıştır.
+
+Servis dosyasında Restart=on-failure ve RestartSec parametreleri kullanılarak hata durumlarında otomatik yeniden başlatma mekanizması uygulanmıştır.
+
+Servis bağımlılıkları doğru şekilde tanımlanmış, ağ servisi hazır olmadan başlatılmaması için After=network.target kullanılmıştır.
+
+Servise ait hata kayıtları journalctl -u <servis_adı> -p err filtresi ile analiz edilmiş, kritik veya hata seviyesinde log tespit edilmemiştir.
+
+Servis logları logrotate ile yönetilmiş, yapılandırma logrotate -f komutu kullanılarak zorla tetiklenmiş ve log döndürme işleminin başarılı olduğu kanıtlanmıştır.
+
+Sistem paketleri (systemd, logrotate vb.) APT üzerinden hatasız şekilde yönetilmiş, servislerin kararlı çalıştığı doğrulanmıştır.
+
