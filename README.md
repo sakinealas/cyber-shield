@@ -94,11 +94,27 @@ Log analizi bir Bash betiği ile otomatikleştirilmiş, betiğin CPU süresi ve 
 -Sistem paketleri (systemd, logrotate vb.) APT üzerinden hatasız şekilde yönetilmiş, servislerin kararlı çalıştığı doğrulanmıştır.
 
 ## Sistem Sertleştirme ve Otomasyon
-Bu haftada sistem erişimi ve otomasyon süreçleri güvenlik odaklı şekilde yapılandırılmıştır.
-SSH erişimi parola tabanlı kimlik doğrulama kapatılarak yalnızca anahtar (key-based) üzerinden sağlanmıştır. Root kullanıcısı ile doğrudan erişim devre dışı bırakılmıştır.
+Bu haftada Cyber Shield projesi kapsamında Linux tabanlı bir sistemde erişim güvenliği güçlendirilmiş ve güvenlik denetimleri otomatik hale getirilmiştir.
+- SSH servisi güvenlik sertleştirme ilkelerine uygun şekilde yapılandırılmıştır.
+  - Root kullanıcısının doğrudan SSH erişimi devre dışı bırakılmıştır (`PermitRootLogin no`).
+  - Parola tabanlı kimlik doğrulama kapatılmıştır (`PasswordAuthentication no`).
+  - Yalnızca anahtar tabanlı (key-based) kimlik doğrulama kullanılmıştır.
 
-Açık portlar ss komutu ile analiz edilmiş, SSH logları üzerinden başarısız giriş denemeleri tespit edilmiştir. Belirlenen eşik değerin üzerindeki IP adresleri otomatik olarak ufw güvenlik duvarı kurallarına eklenerek engellenmiştir.
+- Sistem üzerinde dinlenen portlar ve servisler `ss` komutu kullanılarak analiz edilmiş,
+  elde edilen çıktılar raporlanmıştır.
 
-Otomasyon betiği modüler (fonksiyon bazlı) yapıda geliştirilmiş, set -e ve trap kullanılarak hata yönetimi sağlanmıştır. Gereksiz tekrar çalışmaları önlemek amacıyla önbellek (cache) mekanizması uygulanmıştır.
+- Geliştirilen güvenlik otomasyon betiği:
+  - Modüler ve fonksiyonel bir yapıda tasarlanmıştır.
+  - `set -e` ve `trap` mekanizmaları ile hata yakalama ve güvenli sonlandırma sağlanmıştır.
+  - Daha önce işlenen veriler için önbellek (caching) kontrolü uygulanmıştır.
 
-Betik, systemd service ve systemd timer kullanılarak insan müdahalesi olmadan periyodik olarak çalışacak şekilde zamanlanmış, tüm çıktılar merkezi log dosyasına kaydedilmiştir.
+- Şüpheli veya yetkisiz IP adresleri yalnızca dosya bazlı olarak kaydedilmemiş,
+  aynı zamanda `ufw` güvenlik duvarı kurallarına otomatik olarak eklenmiştir.
+
+- Veri transfer süreçleri güvenli ve sıkıştırılmış yöntemler
+  (`rsync`, `curl`) kullanılarak gerçekleştirilmiştir.
+
+- Otomasyon süreci:
+  - Betikler insan müdahalesi olmadan çalışacak şekilde
+    `systemd timer` (alternatif olarak cron) ile zamanlanmıştır.
+  - Tüm çıktılar merkezi log dosyalarında tutulmuştur.
