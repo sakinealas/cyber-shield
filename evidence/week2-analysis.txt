@@ -1,0 +1,11 @@
+Cyber Shield – Week 2 Analysis
+
+- SSH brute-force girişimleri tespit edildi
+- En çok saldıran IP adresleri çıkarıldı
+- sudo ve CRON aktiviteleri incelendi
+- CPU ve RAM tüketen süreçler analiz edildi
+- Zombie process kontrolü yapıldı (bulunmadı)
+
+Amaç:
+Gerçek sistem logları yerine simülasyon logları kullanılarak
+tekrar edilebilir ve güvenli analiz ortamı oluşturulmuştur.
