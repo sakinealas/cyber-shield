@@ -1,1 +1,11 @@
+[Unit]
+Description=Cyber Shield Blacklist Manager
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /opt/cyber-shield/scripts/blacklist_manager.sh
+
+[Install]
+WantedBy=multi-user.target
 
